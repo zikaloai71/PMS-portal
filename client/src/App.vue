@@ -1,7 +1,9 @@
 <template>
   <div id="app">
+   <AppLayout>
     <router-view />
     <GlobalNotifications />
+  </AppLayout>
   </div>
 </template>
 
@@ -9,7 +11,7 @@
 import { onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import GlobalNotifications from '@/components/GlobalNotifications.vue'
-
+import AppLayout from '@/layouts/AppLayout.vue'
 const authStore = useAuthStore()
 
 // Initialize auth state from localStorage on app start

@@ -105,15 +105,4 @@ export function formatPropertyType(type: string): string {
 
 
 
-// Image fallback utility
-export function getImageFallback(type: string): string {
-  const fallbacks: Record<string, string> = {
-    villa: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400',
-    apartment: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400',
-    studio: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=400',
-    house: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400',
-    default: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400',
-  }
-  
-  return fallbacks[type.toLowerCase()] || fallbacks.default
-}
+

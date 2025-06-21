@@ -1,10 +1,9 @@
 <template>
-    <AppLayout>
         <v-container>
             <!-- Page Header -->
             <v-row justify="center" class="mb-8">
                 <v-col cols="12" md="8" class="text-center">
-                    <h1 class="text-h3 font-weight-bold mb-4">
+                    <h1 class="mb-4 text-h3 font-weight-bold">
                         Available Properties
                     </h1>
                     <p class="text-h6 text-medium-emphasis">
@@ -24,8 +23,7 @@
             <!-- Error State -->
             <v-row v-else-if="error">
                 <v-col cols="12">
-                    <AlertMessage type="error" title="Failed to load properties" :message="error.message" dismissible
-                        @dismiss="clearError" />
+                    <AlertMessage type="error" title="Failed to load properties" :message="error.message"  />
                 </v-col>
             </v-row>
 
@@ -70,7 +68,7 @@
                     <v-icon size="64" color="grey-lighten-1" class="mb-4">
                         mdi-home-search
                     </v-icon>
-                    <h3 class="text-h5 font-weight-medium mb-4">No properties available</h3>
+                    <h3 class="mb-4 text-h5 font-weight-medium">No properties available</h3>
                     <p class="text-body-1 text-medium-emphasis">
                         We couldn't find any properties at the moment. Please check back later.
                     </p>
@@ -81,23 +79,20 @@
             <BookingModal v-if="selectedProperty" :property="selectedProperty" :is-submitting="isCreatingBooking"
                 @close="selectedProperty = null" @submit="handleCreateBooking" />
         </v-container>
-    </AppLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import AppLayout from '@/components/layouts/AppLayout.vue'
+
 import PropertyCard from '@/components/PropertyCard.vue'
 import BookingModal from '@/components/BookingModal.vue'
 import LoadingSpinner from '@/components/ui/LoadingSpinner.vue'
 import AlertMessage from '@/components/ui/AlertMessage.vue'
 import { useGetProperties, useCreateBooking } from '@/composables'
-import { useAppStore } from '@/stores/app'
 import { useAuthStore } from '@/stores/auth'
 import { useNotificationStore } from '@/stores/notification'
 import type { Property, BookingFormData } from '@/types'
 
-const appStore = useAppStore()
 const authStore = useAuthStore()
 const notificationStore = useNotificationStore()
 
@@ -149,7 +144,5 @@ const handleCreateBooking = async (bookingData: BookingFormData & { guestEmail: 
     }
 }
 
-const clearError = () => {
-    appStore.clearError()
-}
+
 </script>

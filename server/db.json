@@ -62,6 +62,16 @@
       "imageUrl": "https://img.freepik.com/free-photo/vertical-shot-white-building-clear-sky_181624-4575.jpg?semt=ais_hybrid&w=740",
       "available": false,
       "id": "7416"
+    },
+    {
+      "title": "Budget Studio",
+      "description": "Simple but comfortable studio apartment perfect for budget travelers. Clean and well-maintained with all essential amenities.",
+      "type": "studio",
+      "location": "Prague, Czech Republic",
+      "pricePerNight": 45,
+      "imageUrl": "",
+      "available": true,
+      "id": "7417"
     }
   ],
   "bookings": [
@@ -100,6 +110,14 @@
       "checkIn": "2025-06-21",
       "checkOut": "2025-06-22",
       "status": "pending"
+    },
+    {
+      "id": "327c",
+      "propertyId": "1",
+      "guestName": "Zain Nasser",
+      "guestEmail": "guest123@example.com",
+      "checkIn": "2025-06-24",
+      "checkOut": "2025-06-30"
     }
   ]
 }

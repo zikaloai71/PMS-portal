@@ -14,7 +14,7 @@
         variant="flat"
       >
         <v-icon start>{{ statusIcon }}</v-icon>
-        {{ booking.status.charAt(0).toUpperCase() + booking.status.slice(1) }}
+        {{ booking.status? booking.status.charAt(0).toUpperCase() + booking.status.slice(1) :'pending' }}
       </v-chip>
     </v-card-title>
 
@@ -75,18 +75,23 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { Booking, Property } from '@/types'
+import type { Booking } from '@/types'
+import { useGetProperty } from '@/composables'
 import { formatDate, formatShortDate, formatCurrency, calculateNights, isDateInFuture, isDateInPast } from '@/utils'
 
 interface Props {
   booking: Booking
-  property?: Property
 }
 
 const props = defineProps<Props>()
 
+// Fetch property data using the property ID from booking
+const { data: property } = useGetProperty({
+  propertyId: props.booking.propertyId.toString()
+})
+
 const propertyTitle = computed(() => {
-  return props.property?.title || `Property #${props.booking.propertyId}`
+  return property.value?.title || `Property #${props.booking.propertyId}`
 })
 
 const statusColor = computed(() => {
@@ -98,7 +103,7 @@ const statusColor = computed(() => {
     case 'cancelled':
       return 'error'
     default:
-      return 'default'
+      return 'warning'
   }
 })
 
@@ -111,7 +116,7 @@ const statusIcon = computed(() => {
     case 'cancelled':
       return 'mdi-close-circle'
     default:
-      return 'mdi-help-circle'
+      return 'mdi-clock-outline'
   }
 })
 
@@ -121,7 +126,7 @@ const nightsCount = computed(() => {
 
 const totalPrice = computed(() => {
   const nights = nightsCount.value
-  const pricePerNight = props.property?.pricePerNight || 0
+  const pricePerNight = property.value?.pricePerNight || 0
   return nights * pricePerNight
 })
 
