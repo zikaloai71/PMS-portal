@@ -39,8 +39,7 @@ export const useAuthStore = defineStore('auth', {
 
     logout() {
       this.setUser(null)
-      // Clear any redirect path
-      localStorage.removeItem('pms_redirect_after_login')
+      window.location.reload()
     },
 
     // Initialize auth from localStorage on app start

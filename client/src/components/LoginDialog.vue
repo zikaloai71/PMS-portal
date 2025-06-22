@@ -72,32 +72,6 @@
             </v-btn>
           </v-form>
 
-          <!-- Demo Accounts -->
-          <div class="mt-8">
-            <v-divider class="mb-4">
-              <span class="px-3 text-medium-emphasis">Demo Accounts</span>
-            </v-divider>
-
-            <div class="gap-2 d-flex flex-column">
-              <v-card
-                v-for="demoAccount in demoAccounts"
-                :key="demoAccount.email"
-                variant="outlined"
-                :disabled="isLoading"
-                class="cursor-pointer"
-                hover
-                @click="loginWithDemo(demoAccount.email)"
-              >
-                <v-card-text class="d-flex align-center justify-space-between pa-3">
-                  <div>
-                    <div class="font-weight-medium">{{ demoAccount.name }}</div>
-                    <div class="text-caption text-medium-emphasis">{{ demoAccount.email }}</div>
-                  </div>
-                  <v-icon color="medium-emphasis">mdi-chevron-right</v-icon>
-                </v-card-text>
-              </v-card>
-            </div>
-          </div>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -129,13 +103,6 @@ const email = ref('')
 const hasError = ref(false)
 const errorMessage = ref('')
 
-// Demo accounts
-const demoAccounts = [
-  { name: 'Zain Nasser', email: 'guest123@example.com' },
-  { name: 'Kareem Khalid', email: 'guest456@example.com' },
-  { name: 'Omar Ammar', email: 'admin123@example.com' },
-]
-
 // Computed
 const isLoading = computed(() => loginMutation.isPending.value)
 const isEmailValid = computed(() => email.value && validateEmail(email.value))
@@ -161,11 +128,6 @@ const handleLogin = async () => {
     setError(error.message || 'Login failed. Please check your email.')
     
   }
-}
-
-const loginWithDemo = async (demoEmail: string) => {
-  email.value = demoEmail
-  await handleLogin()
 }
 
 const setError = (message: string) => {
