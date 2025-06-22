@@ -24,13 +24,7 @@ export function useLoginMutation() {
     },
     onError: (error) => {
       console.error('Login failed:', error)
-      const message = error instanceof Error ? error.message : 'Login failed'
-      notificationStore.error(
-        message === 'User not found' 
-          ? 'No account found with this email address'
-          : 'Login failed. Please try again.',
-        'Login Failed'
-      )
+      notificationStore.error('No account found with this email address')
     },
   })
 }

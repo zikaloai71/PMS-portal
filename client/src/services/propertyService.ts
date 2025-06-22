@@ -1,6 +1,6 @@
 import { apiClient, API_ENDPOINTS } from '@/lib/axios'
-import type { 
-  Property, 
+import type {
+  Property,
   Booking,
   CreateBookingRequest,
   PropertyFilters,
@@ -9,11 +9,11 @@ import type {
 
 // Property API Service
 export const propertyService = {
-  async getAllProperties(propertiesFilters?:PropertyFilters): Promise<Property[]> {
+  async getAllProperties(propertiesFilters?: PropertyFilters): Promise<Property[]> {
     try {
-      const response = await apiClient.get<Property[]>(API_ENDPOINTS.properties.getAll,{
-        params:{
-            available: propertiesFilters?.filters?.available || undefined,
+      const response = await apiClient.get<Property[]>(API_ENDPOINTS.properties.getAll, {
+        params: {
+          available: propertiesFilters?.filters?.available === undefined ? undefined : propertiesFilters?.filters?.available,
         }
       })
       return response.data
@@ -36,13 +36,13 @@ export const propertyService = {
 
 
   // Booking actions on properties
-  async getBookings(bookingFilters?:BookingFilters): Promise<Booking[]> {
-    
+  async getBookings(bookingFilters?: BookingFilters): Promise<Booking[]> {
+
     try {
-      const response = await apiClient.get<Booking[]>(API_ENDPOINTS.properties.bookings.getAll,{
-        params:{
-            guestEmail: bookingFilters?.guestEmail || undefined,
-            status: bookingFilters?.status || undefined,
+      const response = await apiClient.get<Booking[]>(API_ENDPOINTS.properties.bookings.getAll, {
+        params: {
+          guestEmail: bookingFilters?.guestEmail || undefined,
+          status: bookingFilters?.status || undefined,
         }
       })
       return response.data
@@ -59,6 +59,7 @@ export const propertyService = {
     try {
       const response = await apiClient.post<Booking>(API_ENDPOINTS.properties.bookings.create, {
         ...bookingData,
+        status: 'pending', 
       })
       return response.data
     } catch (error) {

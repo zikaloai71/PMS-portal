@@ -117,7 +117,44 @@
       "guestName": "Zain Nasser",
       "guestEmail": "guest123@example.com",
       "checkIn": "2025-06-24",
-      "checkOut": "2025-06-30"
+      "checkOut": "2025-06-30",
+      "status": "pending"
+    },
+    {
+      "id": "76a0",
+      "propertyId": "2",
+      "guestName": "kimo",
+      "guestEmail": "guest456@example.com",
+      "checkIn": "2025-06-25",
+      "checkOut": "2025-07-01",
+      "status": "pending"
+    },
+    {
+      "id": "55fa",
+      "propertyId": "1",
+      "guestName": "Kareem Khalid",
+      "guestEmail": "guest456@example.com",
+      "checkIn": "2025-07-31",
+      "checkOut": "2025-09-17",
+      "status": "pending"
+    },
+    {
+      "id": "3e45",
+      "propertyId": "2",
+      "guestName": "Kareem Khalid",
+      "guestEmail": "guest456@example.com",
+      "checkIn": "2025-06-30",
+      "checkOut": "2025-08-06",
+      "status": "pending"
+    },
+    {
+      "id": "0100",
+      "propertyId": "2",
+      "guestName": "Zain Nasser",
+      "guestEmail": "guest123@example.com",
+      "checkIn": "2025-06-24",
+      "checkOut": "2025-06-27",
+      "status": "pending"
     }
   ]
 }

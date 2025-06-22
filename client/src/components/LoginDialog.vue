@@ -112,8 +112,6 @@ import { validateEmail } from '@/utils'
 import { paths } from '@/router/paths'
 
 
-
-
 // Emits
 const emit = defineEmits<{
   'close': []
@@ -121,6 +119,7 @@ const emit = defineEmits<{
 
 const router = useRouter()
 const loginMutation = useLoginMutation()
+
 
 // Internal state
 const dialog = ref(false)
@@ -155,12 +154,12 @@ const handleLogin = async () => {
   try {
     clearError()
     await loginMutation.mutateAsync(email.value)
-    
     await router.push(paths.home.properties.root)
     
     closeDialog()
   } catch (error: any) {
     setError(error.message || 'Login failed. Please check your email.')
+    
   }
 }
 

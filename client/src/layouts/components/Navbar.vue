@@ -1,18 +1,21 @@
 <template>
     <v-app-bar :elevation="1" color="white" height="64" prominent>
-        <v-container fluid class="d-flex align-center pa-0">
+        <v-container fluid class="d-flex align-center">
             <!-- Logo/Brand -->
-            <v-btn :to="paths.home.properties.root" variant="text" class="text-h6 font-weight-bold text-primary">
-                <v-icon start>mdi-hotel</v-icon>
-                PMS Guest Portal
-            </v-btn>
+                <img 
+                    src="@/assets/logo.png" 
+                    alt="PMS Guest Portal" 
+                    class="cursor-pointer w-28 h-15 object-fit"
+                    @click="$router.push(paths.home.properties.root)"
+                />
+         
 
             <v-spacer></v-spacer>
 
             <!-- Navigation Links -->
             <template v-if="isAuthenticated">
                 <v-btn :to="toBookingsPage" variant="text" :color="$route.name === toBookingsPage ? 'primary' : 'default'"
-                    class="d-none d-md-flex">
+                    class="d-none d-md-flex me-2">
                     <v-icon start>mdi-calendar-check</v-icon>
                     My Bookings
                 </v-btn>
@@ -92,11 +95,13 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
+import { useNotificationStore } from '@/stores/notification'
 import { paths } from '@/router'
 import LoginDialog from '@/components/LoginDialog.vue'
 
 // Store
 const authStore = useAuthStore()
+const notificationStore = useNotificationStore()
 
 // Local state
 const drawer = ref(false)
@@ -113,9 +118,15 @@ const handleLogout = async () => {
     try {
         await authStore.logout()
         drawer.value = false
-        window.location.reload()
+        
+        // Show success notification
+        notificationStore.success('You have been successfully logged out.', 'Logout Successful')
+
     } catch (error) {
         console.error('Logout error:', error)
+        notificationStore.error('Failed to logout. Please try again.', 'Logout Failed')
     }
 }
 </script>
+
+

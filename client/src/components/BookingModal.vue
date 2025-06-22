@@ -134,7 +134,7 @@
         <v-btn
           color="primary"
           variant="elevated"
-          :disabled="isSubmitting || !isFormValid"
+          :disabled="isSubmitting"
           :loading="isSubmitting"
           @click="handleSubmit"
         >
@@ -148,7 +148,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import type { Property, BookingFormData, FormErrors } from '@/types'
+import type { Property  } from '@/entities'
 import { formatCurrency, validateRequired, validateBookingDates, calculateNights } from '@/utils'
 import { useAuthStore } from '@/stores/auth'
 
@@ -205,13 +205,7 @@ const totalPrice = computed(() => {
   return nights.value * props.property.pricePerNight
 })
 
-const isFormValid = computed(() => {
-  return formData.value.guestName.trim() &&
-         formData.value.checkIn &&
-         formData.value.checkOut &&
-         isValidDateRange.value &&
-         Object.keys(errors.value).length === 0
-})
+
 
 // Validation
 const validateForm = (): boolean => {
